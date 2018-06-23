@@ -14,10 +14,12 @@ io.on('connection',(socket)=>{
     socket.on('disconnect',()=>{
         console.log("User disconnected");
     })
-    
+    socket.emit('newUser',{from:'Admin',text:'Welcome to chat app'});
+    socket.broadcast.emit('newUser',{from:'Admin',text:'New user has joined'})
     socket.on('createnewMessageEvent',(data)=>{
         console.log('create email',data.text)
-        socket.emit('newMessageEvent',{from:data.from,text:data.text,createdAt:new Date()});
+        //socket.emit('newMessageEvent',{from:data.from,text:data.text,createdAt:new Date()});
+        io.emit('newMessageEvent',{from:data.from,text:data.text,createdAt:new Date()});
     })
 })
 

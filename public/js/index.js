@@ -6,6 +6,7 @@ socket.on('connect',function(){
 socket.on('disconnect',function(){
     console.log("Disconnected");
 })
-socket.on('newMessageEvent',function(data){
-    console.log("newMessageEvent",data.text)
-});
+ socket.on('newUser',function(data){
+    console.log("fromAdmin",data.text)
+ });
+
