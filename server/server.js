@@ -47,8 +47,11 @@ io.on('connection',(socket)=>{
         callback();
     })
     socket.on('newLocation',(data)=>{
-        console.log(`lattitude: ${data.lattitude}`)
-        io.emit('newLocationMaps',messageGeneratorLoaction("User",data.lattitude,data.longitude))
+        var user = users.getUser(socket.id);
+        if(user){
+            io.to(user.room).emit('newLocationMaps',messageGeneratorLoaction(user.name,data.lattitude,data.longitude))
+        }
+       
     });
 })
 
